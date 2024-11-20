@@ -73,14 +73,38 @@
 
 
                     </section>
-                    <!-- Divider-->
-                    <div class="pb-5"></div>
+                    <section>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h2 class="text-primary fw-bolder mb-0">Certificados</h2>
+                        </div>
+
+                        {% for certificado in certificados %}
+                        <div class="card shadow border-0 rounded-4 mb-5">
+                            <div class="card-body p-5">
+                                <div class="row align-items-center gx-5">
+                                    <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                        <div class="bg-light p-4 rounded-4">
+                                            <div class="text-primary fw-bolder mb-2">{{ certificado.data_cert }}</div>
+                                            <div class="small fw-bolder">{{ certificado.nome_cert }}</div>
+                                            <div class="small text-muted">{{ certificado.local_cert }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div>{{ certificado.descricao_cert }}</div>
+                                        <a href="{{ certificado.url_cert }}" target="_blank"
+                                            class="btn btn-primary mt-3">Ver Certificado</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </section>
+
                     <!-- Skills Section-->
                     <section>
                         <!-- Skillset Card -->
                         <div class="card shadow border-0 rounded-4 mb-5">
                             <div class="card-body p-5">
-                                <!-- Skills List -->
 
                                 <!-- Linguagens List -->
                                 <div class="mb-0">
