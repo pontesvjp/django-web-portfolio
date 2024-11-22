@@ -50,3 +50,14 @@ class certificados(models.Model):
 
     def __str__(self):
         return self.nome_cert
+
+
+class contato(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    telefone = models.CharField(max_length=20, blank=True)
+    mensagem = models.TextField()
+    criado_em = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.nome

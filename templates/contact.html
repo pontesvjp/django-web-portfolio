@@ -9,9 +9,7 @@
       <!-- Formulário de contato-->
       <div class="bg-light rounded-4 py-5 px-4 px-md-5">
         <div class="text-center mb-5">
-          <div
-            class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"
-          >
+          <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
             <i class="bi bi-envelope"></i>
           </div>
           <h1 class="fw-bolder">Entre em contato</h1>
@@ -19,93 +17,32 @@
         </div>
         <div class="row gx-5 justify-content-center">
           <div class="col-lg-8 col-xl-6">
-            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-              <!-- Nome-->
+            <form id="contactForm" method="POST" action="{% url 'contact' %}">
+              {% csrf_token %}
+              <!-- Campos do formulário -->
               <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  id="name"
-                  type="text"
-                  placeholder="Digite seu nome..."
-                  data-sb-validations="required"
-                />
+                <input class="form-control" id="name" name="name" type="text" placeholder="Digite seu nome..." />
                 <label for="name">Nome completo</label>
-                <div class="invalid-feedback" data-sb-feedback="name:required">
-                  O nome é obrigatório.
-                </div>
               </div>
-              <!-- Email-->
+
               <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  id="email"
-                  type="email"
-                  placeholder="nome@exemplo.com"
-                  data-sb-validations="required,email"
-                />
+                <input class="form-control" id="email" name="email" type="email" placeholder="nome@exemplo.com" />
                 <label for="email">Endereço de email</label>
-                <div class="invalid-feedback" data-sb-feedback="email:required">
-                  O email é obrigatório.
-                </div>
-                <div class="invalid-feedback" data-sb-feedback="email:email">
-                  Email inválido.
-                </div>
               </div>
-              <!-- Telefone-->
+
               <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  id="phone"
-                  type="tel"
-                  placeholder="(XX) XXXXX-XXXX"
-                  data-sb-validations="required"
-                />
+                <input class="form-control" id="phone" name="phone" type="tel" placeholder="(XX) XXXXX-XXXX" />
                 <label for="phone">Número de telefone</label>
-                <div class="invalid-feedback" data-sb-feedback="phone:required">
-                  O telefone é obrigatório.
-                </div>
               </div>
-              <!-- Mensagem-->
+
               <div class="form-floating mb-3">
-                <textarea
-                  class="form-control"
-                  id="message"
-                  placeholder="Digite sua mensagem aqui..."
-                  style="height: 10rem"
-                  data-sb-validations="required"
-                ></textarea>
+                <textarea class="form-control" id="message" name="message" placeholder="Digite sua mensagem aqui..."
+                  style="height: 10rem"></textarea>
                 <label for="message">Mensagem</label>
-                <div
-                  class="invalid-feedback"
-                  data-sb-feedback="message:required"
-                >
-                  A mensagem é obrigatória.
-                </div>
               </div>
-              <!-- Mensagem de sucesso-->
-              <div class="d-none" id="submitSuccessMessage">
-                <div class="text-center mb-3">
-                  <div class="fw-bolder">Envio realizado com sucesso!</div>
-                  Para ativar este formulário, cadastre-se em
-                  <br />
-                  <a href="https://startbootstrap.com/solution/contact-forms"
-                    >https://startbootstrap.com/solution/contact-forms</a
-                  >
-                </div>
-              </div>
-              <!-- Mensagem de erro-->
-              <div class="d-none" id="submitErrorMessage">
-                <div class="text-center text-danger mb-3">
-                  Erro ao enviar mensagem!
-                </div>
-              </div>
-              <!-- Botão de envio-->
+
               <div class="d-grid">
-                <button
-                  class="btn btn-primary btn-lg disabled"
-                  id="submitButton"
-                  type="submit"
-                >
+                <button class="btn btn-primary btn-lg" type="submit">
                   Enviar
                 </button>
               </div>
@@ -116,5 +53,30 @@
     </div>
   </section>
 </main>
-<!-- Rodapé-->
+<script>
+  document.querySelector("#contactForm").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Impede o envio padrão do formulário
+
+    const form = new FormData(this); // Coleta os dados do formulário
+    const response = await fetch(this.action, {
+      method: "POST",
+      body: form,
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      // Mensagem de sucesso
+      alert("Formulário enviado com sucesso!");
+
+      // Limpar os campos do formulário
+      this.reset();
+    } else {
+      // Mensagem de erro
+      alert("Erro ao enviar: " + result.message);
+    }
+  });
+</script>
+
+
 {% endblock %}
