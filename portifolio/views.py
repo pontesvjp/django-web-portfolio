@@ -13,10 +13,10 @@ def contact(request):
 
 
 def resume(request):
-    experiencia_list = experiencia.objects.all()
-    educacao_list = educacao.objects.all()
+    experiencia_list = experiencia.objects.all().order_by('-id')
+    educacao_list = educacao.objects.all().order_by('-id')
     skills_list = skills.objects.all()
-    certificados_list = certificados.objects.all()
+    certificados_list = certificados.objects.all().order_by('-id')
     return render(request, 'resume.html', {
         'experiencias': experiencia_list,
         'educacoes': educacao_list,
@@ -26,5 +26,5 @@ def resume(request):
 
 
 def projects(request):
-    projects_list = projetos.objects.all()
+    projects_list = projetos.objects.all().order_by('-id')
     return render(request, 'projects.html', {'projetos': projects_list})
