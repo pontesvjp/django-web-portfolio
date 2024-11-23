@@ -23,13 +23,12 @@
                                     <a href="{{ projeto.url_projeto }}" target="_blank" class="btn btn-primary">Ver
                                         Projeto</a>
                                 </div>
-                                {% if projeto.foto == '' or projeto.foto == null %}
+
                                 <img class="img-fluid w-100" style="max-height: 400px; object-fit: cover;"
                                     src="https://dummyimage.com/300x400/343a40/6c757d" alt="..." />
-                                {% else %}
-                                <img class="img-fluid w-100" style="max-height: 400px; object-fit: cover;"
-                                    src="{{projeto.foto.url}}" alt="..." />
-                                {% endif %}
+
+
+
                             </div>
                         </div>
                     </div>
