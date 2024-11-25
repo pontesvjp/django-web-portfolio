@@ -26,7 +26,7 @@ def contact(request):
 
 
 def resume(request):
-    experiencia_list = experiencia.objects.all().order_by('-id')
+    experiencia_list = experiencia.objects.all().order_by('id')
     educacao_list = educacao.objects.all().order_by('-id')
     skills_list = skills.objects.all()
     certificados_list = certificados.objects.all().order_by('-id')
